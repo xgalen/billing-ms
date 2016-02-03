@@ -20,4 +20,11 @@ describe('Total amount', function () {
             realAmount = bill.getAmount(billInfo.lineItems);
         realAmount.should.equal(expectedAmount);
     });
+    it('Given the bill info, returns correct format', function () {
+        var expectedBill = "aeiou",
+            expectedTotal = 26,
+            realBill = bill.get(billInfo);
+        realBill.bill.should.equal(expectedBill);
+        realBill.total.should.equal(expectedTotal);
+    });
 });
