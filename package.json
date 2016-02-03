@@ -10,6 +10,7 @@
         "basic-request": "0.2.x",
         "mocha": "1.x.x",
         "supertest": "0.10.x",
-        "should": "3.2.x"
+        "should": "3.2.x",
+        "cookie-session": "2.0.x"
     }
 }

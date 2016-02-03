@@ -1,15 +1,23 @@
 var express = require('express'),
     app = module.exports = express(),
-    userId = 'sewriiojclvkslwr',
+    api = require('./lib/api'),
+    cookieSession = require('cookie-session'),
     request = require('basic-request');
-global.token = global.token || getToken(userId);
-
-function getToken(id) {
-    request.get('http://billing.mediasmart.mobi/api/auth?user=' + id, function (error, body) {
-        if (error) {
-            console.error('Could not access billing auth: %s', error);
-            return;
-        }
-	token = JSON.parse(body).token;
-    });
-}
+app.use(cookieSession({
+    secret: 'apitest'
+}));
+app.use(function (req, res, next) {
+    if (req.session.token) {
+        return next();
+    } else {
+        request.get('http://billing.mediasmart.mobi/api/auth?user=sewriiojclvkslwr', function (error, body) {
+            if (error) {
+                console.error('Could not access billing auth: %s', error);
+                return res.status(404).send('Error auth');
+            }
+            req.session.token = JSON.parse(body).token;
+	    return next();
+        });
+    }
+});
+app.get('/total', api.getInfo, api.getAmount, api.get);
