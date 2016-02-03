@@ -1,0 +1,15 @@
+{
+    "name": "billing-api",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "test": "make test"
+    },
+    "dependencies": {
+        "express": "4.x.x",
+        "basic-request": "0.2.x",
+        "mocha": "1.x.x",
+        "supertest": "0.10.x",
+        "should": "3.2.x"
+    }
+}
